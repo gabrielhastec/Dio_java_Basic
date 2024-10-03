@@ -15,7 +15,6 @@ public class Main {
 		System.out.println("Meu nome é " + nomeCompleto);
 		System.out.println("Eu nasci no dia: " + dataNasc);
 		
-
 	}
 	public static String nomeCompleto (String firstName, String secondName){
 		return firstName.concat(" ").concat(secondName);
