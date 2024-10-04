@@ -3,6 +3,8 @@ public class SmartTV {
     private boolean statusTv;
     private int volume;
     private int canal;
+    private final int VOLUME_MAXIMO = 100;
+    private final int CANAL_MAXIMO = 30;
 
     public SmartTV() {
         this.statusTv = false;
@@ -22,8 +24,12 @@ public class SmartTV {
 
     public void aumentarVolume() {
         if (statusTv) {
-            volume++;
-            System.out.println("Volume aumentado para: " + volume);
+            if (volume < VOLUME_MAXIMO) {
+                volume++;
+                System.out.println("Volume aumentado para: " + volume);
+            } else {
+                System.out.println("Volume já está no máximo.");
+            }
         } else {
             System.out.println("A TV está desligada.");
         }
@@ -44,23 +50,45 @@ public class SmartTV {
 
     public void mudarCanal(int novoCanal) {
         if (statusTv) {
-            if (novoCanal > 0) {
+            if (novoCanal > 0 && novoCanal <= CANAL_MAXIMO) {
                 canal = novoCanal;
                 System.out.println("Canal mudado para: " + canal);
             } else {
-                System.out.println("Canal inválido. Por favor, insira um número positivo.");
+                System.out.println("Canal inválido. Por favor, insira um número entre 1 e " + CANAL_MAXIMO + ".");
             }
         } else {
             System.out.println("A TV está desligada.");
         }
     }
 
-    public void mudarCanal() {
+    public void canalProximo() {
         if (statusTv) {
-            canal++;
-            System.out.println("Mudando para o próximo canal: " + canal);
+            if (canal < CANAL_MAXIMO) {
+                canal++;
+                System.out.println("Mudando para o próximo canal: " + canal);
+            } else {
+                System.out.println("Canal já está no máximo.");
+            }
         } else {
             System.out.println("A TV está desligada.");
         }
+    }
+
+    public void canalAnterior() {
+        if (statusTv) {
+            if (canal > 1) {
+                canal--;
+                System.out.println("Mudando para o canal anterior: " + canal);
+            } else {
+                System.out.println("Canal já está no mínimo.");
+            }
+        } else {
+            System.out.println("A TV está desligada.");
+        }
+    }
+
+    public void estadoAtual() {
+        String estado = statusTv ? "ligada" : "desligada";
+        System.out.println("Estado da TV: " + estado + ", Canal: " + canal + ", Volume: " + volume);
     }
 }
